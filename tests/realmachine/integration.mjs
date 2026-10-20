@@ -89,7 +89,7 @@ mkdirSync(dirname(OUT), { recursive: true })
 
   const pre = readSafe(join(regDir, 'pretrain-registry.yaml')) ?? ''
   // pretrain 引用的 baseModel 必须存在
-  t('S4b', 'pretrain registry 引用的 baseModel 目录存在', existsSync('/data/models/Qwen2.5-0.5B-Instruct'), {})
+  t('S4b', 'pretrain registry 引用的 baseModel 目录存在', existsSync('<BASE_MODEL>'), {})
   // pretrain 引用的语料目录必须存在
   const loop = j(join(HERE, '..', '..', 'out', 'pretrain-vertical-loop.json'))
   t('S4c', 'pretrain registry 引用的语料目录存在（引用未悬空）', existsSync(loop?.prepare?.datasetDir ?? '/nonexistent'), { dir: loop?.prepare?.datasetDir })

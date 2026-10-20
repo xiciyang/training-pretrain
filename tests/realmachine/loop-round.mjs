@@ -72,7 +72,7 @@ try {
   const ex = await exportRun({ root: ROOT, runId: tr.runId, checkpointName: ckpt, log })
   round.export = { checkpointName: ckpt, weightsSha256: ex.weightsSha256, params: ex.params, globalStep: ex.globalStep }
   const ds = JSON.parse(readFileSync(join(DATASET, 'shards.json'), 'utf8'))
-  round.lineage.frozen = { baseModel: '/data/models/Qwen2.5-0.5B-Instruct', corpusHash: ds.corpusHash, heldoutHash: ds.heldoutHash, chunkChars: ds.chunkChars, shardCount: ds.shardCount }
+  round.lineage.frozen = { baseModel: '<BASE_MODEL>', corpusHash: ds.corpusHash, heldoutHash: ds.heldoutHash, chunkChars: ds.chunkChars, shardCount: ds.shardCount }
   flush()
 
   /* ── ③ 部署 + 推理 + 评估（serving + testing-core） ── */

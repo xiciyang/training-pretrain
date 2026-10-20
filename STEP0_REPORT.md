@@ -131,7 +131,7 @@ includes，实测不可接受（首个实现确会跑数小时）。改为**无�
 | 训练并发 | 恒为 1（`enforceLimits` 强制） |
 | 已有占用 | `qwen3-embedding` vLLM 容器（长期在跑），**本任务不触碰** |
 | 单次上限 | `maxSteps ≤ 500`、`maxGpuHours ≤ 2`、`params ≤ 0.5B` |
-| 基线模型 | `/data/models/Qwen2.5-0.5B-Instruct`（0.494B） |
+| 基线模型 | `<BASE_MODEL>`（0.494B） |
 | 阶段总额 | **≤ 8 GPU 小时** |
 
 ---

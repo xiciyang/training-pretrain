@@ -36,7 +36,7 @@
 **装配方式**（二选一）：
 ```
 # A. 运行时热注入（本轮验证用）
-dev_inject_plugin  /home/xiciyang/deepseek_harness/inference-training/training-pretrain
+dev_inject_plugin  <repo>
 
 # B. 正式装配（重启后生效）——与 training-sft 同形
 在 profile 的 cordis.patch.yml / bundles 中加入 training-pretrain（package.json 已带 dsh.bundle.patch）

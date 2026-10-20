@@ -111,7 +111,7 @@ P2（6 项，单测/集成） : 6/6 通过（其中 1 项标注"部分"，见 P2
 | 容器残留 | **0**（`ancestor=training-sft/toolchain:0.1.0` 实测 0；smoke 容器 0） |
 | 存活端点 | **0**（serving 注册表 10 条全部 `torn_down`） |
 | 既有服务 | `qwen3-embedding`（vLLM，长期在跑）**未被触碰** |
-| 基座模型 | `/data/models/Qwen2.5-0.5B-Instruct` **只读**；导出产物写在独立 run 目录 |
+| 基座模型 | `<BASE_MODEL>` **只读**；导出产物写在独立 run 目录 |
 | 训练镜像 | `training-sft/toolchain:0.1.0`（复用，不新建；"同一台机器只应有一套训练工具链"） |
 
 ---
