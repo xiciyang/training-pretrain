@@ -1,0 +1,70 @@
+{
+  "name": "@xiciyang/training-pretrain",
+  "version": "0.1.0",
+  "description": "继续预训练（continued pretraining）薄插件：领域语料校验（双轨去泄漏 + 全量 PII）→ 公共训练循环（training-core，容器内 transformers）→ 分片续训（步号与数据位置连续性机器可验）→ 合并 → serving 部署 → 遗忘门禁。依赖长任务 1 冻结的六个 @ai-infra/* 共享库。",
+  "type": "module",
+  "main": "./src/index.mjs",
+  "bin": {
+    "training-pretrain": "./bin/training-pretrain.mjs"
+  },
+  "exports": {
+    ".": {
+      "default": "./src/index.mjs"
+    },
+    "./tools": {
+      "default": "./src/tools.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "bin",
+    "mcp",
+    "python",
+    "skills",
+    "manifest.yaml",
+    "cordis.patch.yml"
+  ],
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "@xiciyang/audit-core": "0.0.x",
+    "@xiciyang/data-core": "0.0.x",
+    "@xiciyang/sandbox-core": "0.0.x",
+    "@xiciyang/state-core": "0.0.x",
+    "@xiciyang/testing-core": "0.0.x",
+    "@xiciyang/training-core": "0.0.x"
+  },
+  "optionalDependencies": {
+    "torch": ">=2.0.0 <3",
+    "transformers": ">=4.40.0 <6",
+    "accelerate": ">=0.30.0 <2"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": ">=0.0.1-rc <2",
+    "cordis": ">=4.0.0-rc <5"
+  },
+  "scripts": {
+    "test": "node tests/run.mjs",
+    "test:unit": "node tests/run.mjs",
+    "test:contract": "node ../inference-contracts/checks/run-all.mjs",
+    "audit-corpus": "node step0/step0-corpus-audit.mjs",
+    "health": "node bin/training-pretrain.mjs health"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh"
+  ],
+  "engines": {
+    "dsh": ">=0.2.0 <0.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiciyang/training-pretrain.git"
+  }
+}

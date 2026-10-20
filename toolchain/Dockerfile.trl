@@ -1,0 +1,18 @@
+# training-rl 冒烟工具链镜像（派生层，秒级构建）
+#
+# 为什么从 training-sft/toolchain:0.1.0 派生（与 training-pretrain 同一取向）：
+#   ① 保住 **torch 2.11.0+cu130 / transformers 5.17.0 同代性** —— veRL 会把
+#      transformers 降级到 5.10.4（RL 探测报告 §1 `[verified]`），那会破坏训练侧工具链同源；
+#   ② 只加一个**纯 python 轮子** trl==1.14.0（925KB，无编译、无系统依赖），
+#      依赖预演显示**零其它变更**（RL 探测报告 §1）；
+#   ③ 版本钉死：避免"谁哪天升级了 trl 导致 RL 数值/API 变了"。
+#
+# 依赖声明纪律：trl 是本包 `package.json` 的 `optionalDependencies` 已声明的 RL 框架之一，
+# 不是"引入未声明依赖"。
+FROM training-sft/toolchain:0.1.0
+
+RUN pip install --no-cache-dir "trl==1.14.0" \
+ && python3 -c "import trl, transformers, torch; print('trl', trl.__version__, '| tf', transformers.__version__, '| torch', torch.__version__)"
+
+LABEL org.opencontainers.image.title="training-rl smoke toolchain"
+LABEL org.opencontainers.image.description="TRL (GRPO) smoke toolchain pinned on top of the SFT toolchain"
